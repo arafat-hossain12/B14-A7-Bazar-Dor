@@ -39,29 +39,37 @@ export default function UpdateProfilePage() {
   };
 
   if (isPending) {
-    return <div className="skeleton mx-auto mt-12 h-64 w-full max-w-md" />;
+    return <div className="skeleton mx-auto mt-10 h-64 w-full max-w-3xl rounded-2xl" />;
   }
 
   return (
-    <div className="mx-auto max-w-md px-4 py-12">
+    <div className="mx-auto max-w-3xl space-y-4 px-4 py-8">
+      <div>
+        <h1 className="text-3xl font-bold">তথ্য আপডেট</h1>
+        <p className="text-sm text-ink/70">আপনার নাম পরিবর্তন করুন।</p>
+      </div>
+
       <form
         onSubmit={onSubmit}
-        className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+        className="space-y-4 rounded-2xl border border-line bg-surface p-6"
       >
-        <h1 className="text-center text-2xl font-bold">তথ্য আপডেট</h1>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">নাম</span>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="input input-bordered w-full"
+            className="h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm outline-none focus:border-brand"
           />
         </label>
         <button
           disabled={loading}
-          className="btn w-full bg-green-600 text-white hover:bg-green-700"
+          className="flex h-10 w-full items-center justify-center rounded-lg border border-brand-strong bg-brand text-sm font-semibold text-brand-content shadow-[0_3px_1px_rgba(5,137,62,0.3)] hover:bg-brand-strong disabled:opacity-60"
         >
-          {loading ? <span className="loading loading-spinner" /> : "Update Information"}
+          {loading ? (
+            <span className="loading loading-spinner loading-sm" />
+          ) : (
+            "Update Information"
+          )}
         </button>
       </form>
     </div>
