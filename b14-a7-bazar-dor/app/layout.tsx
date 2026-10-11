@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
+import { Hind_Siliguri } from "next/font/google";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Ticker from "./components/Ticker";
+
+const hind = Hind_Siliguri({
+  variable: "--font-hind",
+  subsets: ["bengali", "latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "বাজার দর",
@@ -13,10 +20,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="bn" data-theme="light">
-      <body className="min-h-screen flex flex-col">
+    <html lang="bn" data-theme="light" className={hind.variable}>
+      <body className="flex min-h-screen flex-col font-sans">
         <Navbar />
-        <Suspense fallback={<div className="h-9 bg-slate-900" />}>
+        <Suspense fallback={<div className="h-10 border-b border-line bg-surface" />}>
           <Ticker />
         </Suspense>
         <main className="flex-1">{children}</main>

@@ -3,14 +3,25 @@
   themes: light --default;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+@theme {
+  --color-surface: #fafcfa;
+  --color-soft: #f0f5f0;
+  --color-line: #e1e8e1;
+  --color-ink: #1d271f;
+  --color-brand: #05893e;
+  --color-brand-strong: #047f39;
+  --color-brand-content: #f3fbf4;
+  --color-up: #d03739;
+  --color-down: #1a9951;
+}
+
+@theme inline {
+  --font-sans: var(--font-hind), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-soft);
+  color: var(--color-ink);
 }
 
 html {
@@ -25,7 +36,7 @@ html {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 60s linear infinite;
 }
 
 .marquee:hover .marquee-track {
