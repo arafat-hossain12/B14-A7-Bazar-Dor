@@ -1,5 +1,8 @@
 import { getProducts } from "@/lib/api";
+import { toBn } from "@/lib/format";
 import ProductCard from "./ProductCard";
+
+const grid = "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3";
 
 export default async function HomeSections() {
   const products = await getProducts();
@@ -14,12 +17,12 @@ export default async function HomeSections() {
     .sort((a, b) => a.change.pct - b.change.pct)
     .slice(0, 6);
 
-  const grid = "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
-
   return (
-    <>
-      <section className="mx-auto max-w-6xl px-4 py-8">
-        <h2 className="mb-4 text-2xl font-bold text-green-700">আজ দাম বেড়েছে ▲</h2>
+    <div className="mx-auto max-w-6xl space-y-10 px-4 py-10">
+      <section>
+        <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold">
+          <span className="text-base text-up">▲</span> আজ দাম বেড়েছে
+        </h2>
         <div className={grid}>
           {risers.map((p) => (
             <ProductCard key={p.id} product={p} />
@@ -27,8 +30,10 @@ export default async function HomeSections() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-8">
-        <h2 className="mb-4 text-2xl font-bold text-red-600">আজ দাম কমেছে ▼</h2>
+      <section>
+        <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold">
+          <span className="text-base text-down">▼</span> আজ দাম কমেছে
+        </h2>
         <div className={grid}>
           {fallers.map((p) => (
             <ProductCard key={p.id} product={p} />
@@ -36,10 +41,10 @@ export default async function HomeSections() {
         </div>
       </section>
 
-      <section id="সব-পণ্য" className="mx-auto max-w-6xl scroll-mt-28 px-4 py-8">
+      <section id="সব-পণ্য" className="scroll-mt-6">
         <h2 className="text-2xl font-bold">সব পণ্য</h2>
-        <p className="mb-4 text-slate-500">
-          সব নিত্যপ্রয়োজনীয় পণ্যের আজকের দাম ও দামের পরিবর্তন
+        <p className="mb-4 mt-1 text-sm text-ink/70">
+          মোট {toBn(products.length)}টি পণ্য দেখানো হচ্ছে
         </p>
         <div className={grid}>
           {products.map((p) => (
@@ -47,6 +52,6 @@ export default async function HomeSections() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
