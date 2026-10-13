@@ -2,11 +2,13 @@ import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 
-const client = new MongoClient(process.env.MONGODB_URI as string);
+const g = globalThis as unknown as { _mongo?: MongoClient };
+const client = g._mongo ?? new MongoClient(process.env.MONGODB_URI as string);
+if (process.env.NODE_ENV !== "production") g._mongo = client;
 const db = client.db(process.env.MONGODB_DB || "bazardor");
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db, { client }),
+  database: mongodbAdapter(db),
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
