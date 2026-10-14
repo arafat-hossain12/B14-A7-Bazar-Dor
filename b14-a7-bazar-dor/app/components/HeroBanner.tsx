@@ -1,22 +1,29 @@
-"use client"
+"use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function HeroBanner() {
-  const today = new Date().toLocaleDateString("bn-BD", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "Asia/Dhaka",
-  });
+  const [today, setToday] = useState("");
+
+  useEffect(() => {
+    setToday(
+      new Date().toLocaleDateString("bn-BD", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "Asia/Dhaka",
+      })
+    );
+  }, []);
 
   return (
     <section className="mx-auto max-w-6xl px-4 pt-6">
       <div className="flex flex-col items-center justify-between gap-8 rounded-3xl border border-line bg-surface px-6 py-10 md:flex-row md:px-8">
         <div className="flex max-w-xl flex-col items-start gap-2">
-          <span className="rounded-full bg-brand/10 px-3 py-1 text-sm font-medium text-brand">
-            {today}
+          <span className="min-h-7 rounded-full bg-brand/10 px-3 py-1 text-sm font-medium text-brand">
+            {today || "\u00A0"}
           </span>
           <h1 className="text-3xl font-bold leading-tight md:text-4xl">
             আজকের বাজারের দাম এক নজরে

@@ -22,11 +22,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="bn" data-theme="light" className={hind.variable}>
       <body className="flex min-h-screen flex-col font-sans">
-        <Navbar />
+        <Suspense fallback={<div className="h-16 border-b border-line bg-surface" />}>
+          <Navbar />
+        </Suspense>
         <Suspense fallback={<div className="h-10 border-b border-line bg-surface" />}>
           <Ticker />
         </Suspense>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <Suspense
+            fallback={
+              <div className="mx-auto max-w-6xl px-4 py-8">
+                <div className="skeleton h-64 w-full rounded-2xl" />
+              </div>
+            }
+          >
+            {children}
+          </Suspense>
+        </main>
         <Footer />
         <Toaster position="top-center" />
       </body>
