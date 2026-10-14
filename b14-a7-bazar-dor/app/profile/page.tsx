@@ -21,7 +21,12 @@ export default async function ProfilePage() {
         <div className="flex items-center gap-4">
           {user.image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={user.image} alt="" className="size-20 rounded-2xl object-cover" />
+            <img
+              src={user.image}
+              alt=""
+              referrerPolicy="no-referrer"
+              className="size-20 rounded-2xl object-cover"
+            />
           ) : (
             <span className="flex size-20 items-center justify-center rounded-2xl bg-brand text-3xl font-semibold text-brand-content">
               {user.name?.[0]?.toUpperCase() ?? "U"}

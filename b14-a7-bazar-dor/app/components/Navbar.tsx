@@ -62,7 +62,7 @@ export default function Navbar() {
           </span>
           <span className="flex flex-col">
             <span className="text-xl font-bold leading-7 tracking-tight">বাজার দর</span>
-            <span className="text-xs leading-4">{date || "\u00A0"}</span>
+            <span className="text-xs leading-4">{date || " "}</span>
           </span>
         </Link>
 
@@ -76,7 +76,12 @@ export default function Navbar() {
             >
               {user.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={user.image} alt="" className="size-9 rounded-[10px] object-cover" />
+                <img
+                  src={user.image}
+                  alt=""
+                  referrerPolicy="no-referrer"
+                  className="size-9 rounded-[10px] object-cover"
+                />
               ) : (
                 <span className="flex size-9 items-center justify-center rounded-[10px] bg-brand font-semibold text-brand-content">
                   {user.name?.[0]?.toUpperCase() ?? "U"}
@@ -135,7 +140,9 @@ export default function Navbar() {
                 key={c.slug}
                 href={`/category/${c.slug}`}
                 className={`flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition ${
-                  active ? "bg-brand text-brand-content" : "hover:bg-soft"
+                  active
+                    ? "bg-brand text-brand-content"
+                    : "hover:bg-soft"
                 }`}
               >
                 <span>{c.icon}</span>
